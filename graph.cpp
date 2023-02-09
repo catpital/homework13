@@ -1,4 +1,5 @@
 #include "graph.h"
+#include <string>
 //using std namespace;
 #include <iostream>
 Graph::Graph() {
@@ -8,9 +9,10 @@ Graph::Graph() {
     vertexCount = 0;
 }
 // добавление вершины
-void Graph::addVertex(int vnumber)
+void Graph::addVertex(int vnumber, const char* name)
 {
     vertexes[vertexCount] = vnumber;
+    //list vertexname[vertexCount] = name;
     vertexCount++;
 }
 // добавление ребра
@@ -99,7 +101,8 @@ bool Graph::find3hands(int from, int to, int count)
     for (int i = 0; i < SIZE; i++)
         visited[i] = false;
     int current;
-    int tcount=1;
+    int toto;
+    int tcount=0;
     //while (tcount == 0)
     
         //if (current == to)
@@ -109,42 +112,38 @@ bool Graph::find3hands(int from, int to, int count)
         //tcount--;
        // return;
     //}
+    if (to > from) {
         current = from;
+        toto = to;
+    }
+    else {
+        toto = from;
+        current = to;
+        
+    }
+
         int tcurrent = current + 1;
-        int toto = to;
-        while (tcount <= count )
+        
+        for (int i=tcurrent; i<= toto; i++)
         {
-            if (edgeExists(current, tcurrent) && !visited[current] && tcurrent !=toto)
+            if (edgeExists(current, i) && !visited[current])
             {
+               
                 visited[current] = true; // отмечаем как посещенную
                 current++;
                 tcurrent++;
                 tcount++; //счет рукопожатий
-                
             }
-            if (tcurrent!=3)
+            if (tcount>3)
             {
-                std::cout << "count 3" << std::endl;
-                return true ;
+                std::cout << "count =  "<< tcount << std::endl;
+                return false ;
             }
         }
        if (tcount >count)
            return false;
 
-        //{
-          //  for (int i = 0; i < count; i++)
-            //{
-              //  if (edgeExists(current, i) && !visited[i])
-                //{
-                  //  tcount--;
-                    //visited[current] = true;
-                //}
-            //}
-        //}
-           
-        
-        // отмечаем, что путь уже не содержит эту вершину
-        // visited[current] = false;
+       
         
  }
     

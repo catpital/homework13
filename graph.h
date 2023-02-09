@@ -1,4 +1,5 @@
 //#pragma once
+//#include <string>
 #ifndef __GRAPH__
 #define __GRAPH__
 
@@ -8,7 +9,7 @@ class Graph {
 public:
     Graph();
     // добавление вершины
-    void addVertex(int vnumber);
+    void addVertex(int vnumber, const char* name);
     // добавление ребра
     void addEdge(int v1, int v2, int weight);
     // удаление вершины
@@ -27,7 +28,7 @@ private:
     bool vertexExists(int v);
 
     int matrix[SIZE][SIZE]; // матрица смежности
-
+    const char* name; 
     int vertexes[SIZE]; // хранилище вершин
     int vertexCount; // количество добавленных вершин
 };
